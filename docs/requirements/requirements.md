@@ -43,11 +43,11 @@
 |------------------|-----------------------------|
 | Nombre:          | Autenticar usuarios         |
 
-| Descripción:        | El sistema permite a un usuario registrado iniciar sesión proporcionando sus credenciales. Si son válidas, se genera un token JWT. |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| Cómo se ejecutará:  | El cliente ingresa usuario y contraseña en el formulario de login y el sistema valida las credenciales. |
+| Descripción:        | El usuario entra al sistema con su nombre de usuario y contraseña. Si los datos son correctos, el sistema le da acceso y le entrega un token para que pueda usar las demás funciones. |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Cómo se ejecutará:  | El usuario abre la pantalla de inicio, escribe su usuario y contraseña y le da al botón de entrar. |
 | Actor principal:    | Cliente |
-| Precondiciones:     | El usuario debe estar registrado en el sistema. |
+| Precondiciones:     | El usuario ya tiene que tener una cuenta creada en el sistema. |
 
 **► DATOS DE ENTRADA**
 
@@ -79,8 +79,8 @@
 | 1A   | Sistema | Credenciales incorrectas, retorna error 401              | -           |
 | 1B   | Sistema | Cuenta bloqueada tras 3 intentos fallidos                | -           |
 
-| Notas y comentarios: | El token JWT debe enviarse en el header Authorization en cada petición posterior. |
-|----------------------|-----------------------------------------------------------------------------------|
+| Notas y comentarios: | El token que se genera al entrar hay que usarlo en todas las demás peticiones para que el sistema sepa quién está haciendo cada acción. |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 
 **ANEXOS**
 
@@ -90,9 +90,9 @@ PROTOTIPOS: Formulario de login con campos usuario y contraseña.
 
 | No. | Descripción                                                                 |
 |-----|-----------------------------------------------------------------------------|
-| 1   | Después de 3 intentos fallidos la cuenta se bloquea por 15 minutos          |
-| 2   | El token JWT expira en 30 minutos                                           |
-| 3   | Las contraseñas deben almacenarse cifradas con BCrypt                       |
+| 1   | Si el usuario se equivoca 3 veces seguidas, la cuenta se bloquea por 15 minutos |
+| 2   | El token dura 30 minutos, después de eso el usuario tiene que volver a entrar    |
+| 3   | Las contraseñas no se guardan en texto plano, se cifran antes de guardarlas      |
 
 **ABREVIATURAS**
 
@@ -116,11 +116,11 @@ PROTOTIPOS: Formulario de login con campos usuario y contraseña.
 |------------------|-------------------------------|
 | Nombre:          | Consultar saldo de una cuenta |
 
-| Descripción:        | El cliente autenticado puede consultar el saldo actual de cualquiera de sus cuentas registradas. |
-|---------------------|--------------------------------------------------------------------------------------------------|
-| Cómo se ejecutará:  | El cliente selecciona una cuenta desde su panel y el sistema retorna el saldo actualizado. |
+| Descripción:        | El usuario puede ver cuánto dinero tiene en su cuenta en cualquier momento. Solo puede ver las cuentas que le pertenecen. |
+|---------------------|--------------------------------------------------------------------------------------------------------------------------|
+| Cómo se ejecutará:  | El usuario entra a su perfil, escoge la cuenta que quiere revisar y el sistema le muestra el saldo al día. |
 | Actor principal:    | Cliente |
-| Precondiciones:     | El cliente debe estar autenticado con token JWT válido. |
+| Precondiciones:     | El usuario tiene que haber iniciado sesión primero. |
 
 **► DATOS DE ENTRADA**
 
@@ -151,8 +151,8 @@ PROTOTIPOS: Formulario de login con campos usuario y contraseña.
 | 2A   | Sistema | La cuenta no pertenece al cliente, retorna error 403           | -           |
 | 2B   | Sistema | La cuenta no existe, retorna error 404                         | -           |
 
-| Notas y comentarios: | El saldo debe reflejar todas las transacciones en tiempo real. |
-|----------------------|----------------------------------------------------------------|
+| Notas y comentarios: | El saldo que se muestra tiene que estar actualizado, o sea que debe incluir todos los movimientos que se hayan hecho hasta ese momento. |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------|
 
 **ANEXOS**
 
@@ -162,9 +162,9 @@ PROTOTIPOS: Pantalla de detalle de cuenta con saldo y últimos movimientos.
 
 | No. | Descripción                                                                 |
 |-----|-----------------------------------------------------------------------------|
-| 1   | Solo el dueño de la cuenta puede consultar su saldo                         |
-| 2   | La respuesta debe entregarse en menos de 2 segundos                         |
-| 3   | Se registra en el log cada consulta de saldo realizada                      |
+| 1   | Nadie puede ver el saldo de una cuenta que no es suya                        |
+| 2   | La consulta no puede demorar más de 2 segundos                               |
+| 3   | Cada vez que alguien consulta su saldo queda guardado en el registro          |
 
 **ABREVIATURAS**
 
@@ -188,11 +188,11 @@ PROTOTIPOS: Pantalla de detalle de cuenta con saldo y últimos movimientos.
 |------------------|---------------------------------|
 | Nombre:          | Realizar depósitos a una cuenta |
 
-| Descripción:        | El cliente autenticado puede realizar depósitos de dinero a una cuenta bancaria registrada. |
-|---------------------|---------------------------------------------------------------------------------------------|
-| Cómo se ejecutará:  | El cliente selecciona la cuenta destino, ingresa el monto y confirma la operación. |
+| Descripción:        | El usuario puede consignar dinero a una cuenta. El sistema revisa que la cuenta exista y que el monto sea válido antes de hacer el depósito. |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Cómo se ejecutará:  | El usuario elige la cuenta a la que quiere consignar, escribe el valor y confirma. El sistema hace el depósito y le muestra el comprobante. |
 | Actor principal:    | Cliente |
-| Precondiciones:     | El cliente debe estar autenticado y la cuenta destino debe existir. |
+| Precondiciones:     | El usuario tiene que haber iniciado sesión y la cuenta a la que va a consignar debe estar registrada. |
 
 **► DATOS DE ENTRADA**
 
@@ -226,8 +226,8 @@ PROTOTIPOS: Pantalla de detalle de cuenta con saldo y últimos movimientos.
 | 2A   | Sistema | Monto inválido (negativo o cero), retorna error de validación  | -           |
 | 3A   | Sistema | Cuenta destino no existe, retorna error 404                    | -           |
 
-| Notas y comentarios: | El depósito se refleja de inmediato en el saldo y queda registrado en el log de transacciones. |
-|----------------------|-----------------------------------------------------------------------------------------------|
+| Notas y comentarios: | En cuanto se hace el depósito el saldo ya tiene que verse actualizado. Además queda guardado el movimiento para que haya trazabilidad. |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 
 **ANEXOS**
 
@@ -237,9 +237,9 @@ PROTOTIPOS: Formulario de depósito con campo cuenta destino y monto.
 
 | No. | Descripción                                                                 |
 |-----|-----------------------------------------------------------------------------|
-| 1   | El monto mínimo de depósito es $1.000 COP                                  |
-| 2   | El depósito se refleja inmediatamente en el saldo                           |
-| 3   | Cada depósito genera un número de transacción único e irrepetible           |
+| 1   | No se puede consignar menos de $1.000 COP                                   |
+| 2   | El saldo se actualiza apenas se confirma el depósito                        |
+| 3   | Cada depósito tiene un número de comprobante que no se repite               |
 
 **ABREVIATURAS**
 
@@ -261,17 +261,17 @@ PROTOTIPOS: Formulario de depósito con campo cuenta destino y monto.
 
 ### a) ¿Identifica algún requerimiento que deba detallarse más?
 
-RF06 (Enviar reporte a la DIAN en formato JSON) requiere mayor detalle: se deben especificar los campos obligatorios del JSON según la normativa DIAN, la frecuencia de envío, el manejo de errores de rechazo y el proceso de reenvío en caso de fallo.
+El RF06 del envío del reporte a la DIAN le falta bastante detalle. No queda claro qué campos exactos hay que mandar, cada cuánto se envía, ni qué pasa si la DIAN lo rechaza. Eso hay que definirlo bien antes de ponerse a programarlo.
 
 ### b) ¿Existen requerimientos que se contradigan entre sí?
 
-RF05 y RF06 pueden generar tensión: el reporte tributario en PDF para el cliente y el reporte para la DIAN en JSON pueden tener estructuras y periodicidades distintas, lo que implica lógica duplicada si no se diseña un modelo de datos unificado.
+El RF05 y el RF06 se pueden complicar entre sí. Uno genera el reporte en PDF para el cliente y el otro lo manda a la DIAN en JSON, pero si la información que va en cada uno es diferente o tiene formatos distintos, toca hacer dos cosas por separado cuando podría ser una sola. Hay que ponerse de acuerdo en cómo se maneja eso desde el principio.
 
 ### c) ¿Cuáles serían los 2 más importantes para una primera iteración?
 
-1. **RF01 - Autenticación:** Es la base de seguridad del sistema; sin ella ningún otro requerimiento puede operar de forma segura.
-2. **RF04 - Depósitos:** Es la operación transaccional más básica y permite validar el núcleo del modelo bancario.
+1. **RF01 - Autenticación:** Sin esto no funciona nada, porque todas las demás funciones necesitan saber quién es el usuario antes de dejarlo hacer algo.
+2. **RF04 - Depósitos:** Es la operación más básica de cualquier sistema bancario y nos permite probar que el core del sistema está funcionando bien.
 
 ### d) ¿Existe algún requerimiento que NO debería realizarse en el MVP?
 
-RF06 (Enviar reporte a la DIAN en formato JSON) no debería estar en el MVP, ya que depende de integraciones externas con entidades gubernamentales, implica cumplimiento normativo complejo y puede bloquear la entrega del producto central si no se implementa correctamente.
+El RF06 del reporte a la DIAN no debería ir en el MVP. Ese punto depende de cosas externas que no controlamos, como la API de la DIAN, y si nos ponemos a trabajar en eso desde el inicio podemos bloquearnos sin haber terminado lo más importante.
