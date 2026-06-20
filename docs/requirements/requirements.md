@@ -1,16 +1,16 @@
 # Documento de Requerimientos
 ## Sistema Bancario - DOSW Laboratorio 3
 
-**Equipo:** Hever Barrera, Nicolás Prieto, Mabel Bernal  
-**Fecha:** 2026-06-20  
+**Equipo:** Hever Barrera, Nicolás Prieto, Mabel Bernal
+**Fecha:** 2026-06-20
 **Versión:** 1.0
 
 ---
 
-## 1. Requerimientos Funcionales
+## Requerimientos Funcionales
 
-| ID  | Descripción |
-|-----|-------------|
+| ID   | Descripción |
+|------|-------------|
 | RF01 | El sistema debe autenticar usuarios con usuario y contraseña |
 | RF02 | El sistema debe registrar y validar cuentas bancarias (10 dígitos, banco registrado) |
 | RF03 | El sistema debe permitir consultar el saldo de una cuenta por el cliente |
@@ -20,83 +20,244 @@
 | RF07 | El sistema debe permitir realizar retiros de una cuenta validando saldo disponible |
 | RF08 | El sistema debe permitir transferencias entre cuentas registradas |
 
----
+## Requerimientos No Funcionales
 
-## 2. Requerimientos No Funcionales
-
-| ID   | Categoría       | Descripción |
-|------|-----------------|-------------|
-| RNF01 | Seguridad      | Autenticación con tokens JWT |
-| RNF02 | Disponibilidad | 99.5% uptime mensual |
-| RNF03 | Rendimiento    | Respuesta < 2 segundos por operación |
-| RNF04 | Escalabilidad  | Soportar 10.000 usuarios concurrentes |
-| RNF05 | Auditabilidad  | Log de todas las transacciones |
-| RNF06 | Mantenibilidad | Cobertura de pruebas unitarias mínima del 80% |
+| ID    | Categoría       | Descripción |
+|-------|-----------------|-------------|
+| RNF01 | Seguridad       | Autenticación con tokens JWT |
+| RNF02 | Disponibilidad  | 99.5% uptime mensual |
+| RNF03 | Rendimiento     | Respuesta < 2 segundos por operación |
+| RNF04 | Escalabilidad   | Soportar 10.000 usuarios concurrentes |
+| RNF05 | Auditabilidad   | Log de todas las transacciones |
+| RNF06 | Mantenibilidad  | Cobertura de pruebas unitarias mínima del 80% |
 
 ---
 
-## 3. Detalle de Requerimientos Seleccionados
-
-### RF01 - Autenticar usuarios con usuario y contraseña
-
-- **Descripción:** El sistema permite a un usuario registrado iniciar sesión proporcionando sus credenciales (usuario y contraseña). Si son válidas, se genera un token JWT.
-- **Actores:** Cliente, Sistema
-- **Precondiciones:** El usuario debe estar registrado en el sistema.
-- **Flujo principal:**
-  1. El cliente ingresa usuario y contraseña.
-  2. El sistema valida las credenciales contra la base de datos.
-  3. El sistema genera y retorna un token JWT.
-  4. El cliente accede al sistema.
-- **Flujos alternativos:**
-  - Si las credenciales son incorrectas, el sistema retorna error 401.
-  - Si el usuario está bloqueado, el sistema retorna mensaje de cuenta bloqueada.
-- **Postcondiciones:** El cliente tiene un token JWT válido para operar.
-- **Criterios de aceptación:**
-  - El token JWT expira en 30 minutos.
-  - Después de 3 intentos fallidos la cuenta se bloquea temporalmente.
+## Detalle de Requerimientos
 
 ---
 
-### RF03 - Consultar el saldo de una cuenta
+### RF01 - Autenticar usuarios
 
-- **Descripción:** El cliente autenticado puede consultar el saldo actual de cualquiera de sus cuentas registradas.
-- **Actores:** Cliente, Sistema
-- **Precondiciones:** El cliente debe estar autenticado con token JWT válido.
-- **Flujo principal:**
-  1. El cliente selecciona la cuenta a consultar.
-  2. El sistema verifica que la cuenta pertenece al cliente.
-  3. El sistema retorna el saldo actual y la fecha de última transacción.
-- **Flujos alternativos:**
-  - Si la cuenta no pertenece al cliente, el sistema retorna error 403.
-  - Si la cuenta no existe, el sistema retorna error 404.
-- **Postcondiciones:** El cliente visualiza el saldo actualizado.
-- **Criterios de aceptación:**
-  - El saldo mostrado debe reflejar todas las transacciones en tiempo real.
-  - La respuesta debe entregarse en menos de 2 segundos.
+| Código:          | RF01                        |
+|------------------|-----------------------------|
+| Nombre:          | Autenticar usuarios         |
+
+| Descripción:        | El sistema permite a un usuario registrado iniciar sesión proporcionando sus credenciales. Si son válidas, se genera un token JWT. |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| Cómo se ejecutará:  | El cliente ingresa usuario y contraseña en el formulario de login y el sistema valida las credenciales. |
+| Actor principal:    | Cliente |
+| Precondiciones:     | El usuario debe estar registrado en el sistema. |
+
+**► DATOS DE ENTRADA**
+
+| Nombre      | Descripción              | Tipo de campo | Reglas / Aplicación                          | Obligatorio |
+|-------------|--------------------------|---------------|----------------------------------------------|-------------|
+| Usuario     | Nombre de usuario        | Texto         | Mínimo 4 caracteres, sin espacios            | Sí          |
+| Contraseña  | Clave secreta del usuario| Contraseña    | Mínimo 8 caracteres, al menos 1 número       | Sí          |
+
+**DATOS DE SALIDA**
+
+| Nombre       | Descripción                  | Tipo de campo | Reglas / Aplicación              | Obligatorio |
+|--------------|------------------------------|---------------|----------------------------------|-------------|
+| Token JWT    | Token de acceso del usuario  | Texto         | Expira en 30 minutos             | Sí          |
+| Mensaje      | Resultado de la operación    | Texto         | "Login exitoso" o mensaje error  | Sí          |
+
+**FLUJO BÁSICO:**
+
+| Paso | Actor   | Descripción                                              | Excepciones |
+|------|---------|----------------------------------------------------------|-------------|
+| 1    | Cliente | Ingresa usuario y contraseña en el formulario            | -           |
+| 2    | Sistema | Valida las credenciales contra la base de datos          | Paso 1A     |
+| 3    | Sistema | Genera y retorna token JWT                               | -           |
+| 4    | Cliente | Accede al sistema con el token                           | -           |
+
+**FLUJO ALTERNO:**
+
+| Paso | Actor   | Descripción                                              | Excepciones |
+|------|---------|----------------------------------------------------------|-------------|
+| 1A   | Sistema | Credenciales incorrectas, retorna error 401              | -           |
+| 1B   | Sistema | Cuenta bloqueada tras 3 intentos fallidos                | -           |
+
+| Notas y comentarios: | El token JWT debe enviarse en el header Authorization en cada petición posterior. |
+|----------------------|-----------------------------------------------------------------------------------|
+
+**ANEXOS**
+
+PROTOTIPOS: Formulario de login con campos usuario y contraseña.
+
+**REGLAS DE NEGOCIO**
+
+| No. | Descripción                                                                 |
+|-----|-----------------------------------------------------------------------------|
+| 1   | Después de 3 intentos fallidos la cuenta se bloquea por 15 minutos          |
+| 2   | El token JWT expira en 30 minutos                                           |
+| 3   | Las contraseñas deben almacenarse cifradas con BCrypt                       |
+
+**ABREVIATURAS**
+
+| Abreviatura | Significado                  |
+|-------------|------------------------------|
+| JWT         | JSON Web Token               |
+| RF          | Requerimiento Funcional      |
+
+**HISTORIAL DE REVISIÓN**
+
+| Elaborado por    | Aprobado por | Fecha      | Descripción y Justificación de Cambios |
+|------------------|--------------|------------|----------------------------------------|
+| CVDS Company     |              | 22/10/2024 |                                        |
+| Nicolás Prieto   |              | 20/06/2026 | Creación del requerimiento RF01        |
+
+---
+
+### RF03 - Consultar saldo de una cuenta
+
+| Código:          | RF03                          |
+|------------------|-------------------------------|
+| Nombre:          | Consultar saldo de una cuenta |
+
+| Descripción:        | El cliente autenticado puede consultar el saldo actual de cualquiera de sus cuentas registradas. |
+|---------------------|--------------------------------------------------------------------------------------------------|
+| Cómo se ejecutará:  | El cliente selecciona una cuenta desde su panel y el sistema retorna el saldo actualizado. |
+| Actor principal:    | Cliente |
+| Precondiciones:     | El cliente debe estar autenticado con token JWT válido. |
+
+**► DATOS DE ENTRADA**
+
+| Nombre        | Descripción                  | Tipo de campo | Reglas / Aplicación              | Obligatorio |
+|---------------|------------------------------|---------------|----------------------------------|-------------|
+| Número cuenta | Identificador de la cuenta   | Numérico      | 10 dígitos, cuenta debe existir  | Sí          |
+| Token JWT     | Token de sesión del cliente  | Texto         | Debe ser válido y no expirado    | Sí          |
+
+**DATOS DE SALIDA**
+
+| Nombre                  | Descripción                        | Tipo de campo | Reglas / Aplicación         | Obligatorio |
+|-------------------------|------------------------------------|---------------|-----------------------------|-------------|
+| Saldo disponible        | Saldo actual de la cuenta          | Decimal       | Dos decimales, no negativo  | Sí          |
+| Fecha última transacción| Fecha de la última operación       | Fecha         | Formato DD/MM/YYYY HH:mm    | Sí          |
+
+**FLUJO BÁSICO:**
+
+| Paso | Actor   | Descripción                                                    | Excepciones |
+|------|---------|----------------------------------------------------------------|-------------|
+| 1    | Cliente | Selecciona la cuenta a consultar                               | -           |
+| 2    | Sistema | Verifica que la cuenta pertenece al cliente autenticado        | Paso 2A     |
+| 3    | Sistema | Retorna saldo actual y fecha de última transacción             | -           |
+
+**FLUJO ALTERNO:**
+
+| Paso | Actor   | Descripción                                                    | Excepciones |
+|------|---------|----------------------------------------------------------------|-------------|
+| 2A   | Sistema | La cuenta no pertenece al cliente, retorna error 403           | -           |
+| 2B   | Sistema | La cuenta no existe, retorna error 404                         | -           |
+
+| Notas y comentarios: | El saldo debe reflejar todas las transacciones en tiempo real. |
+|----------------------|----------------------------------------------------------------|
+
+**ANEXOS**
+
+PROTOTIPOS: Pantalla de detalle de cuenta con saldo y últimos movimientos.
+
+**REGLAS DE NEGOCIO**
+
+| No. | Descripción                                                                 |
+|-----|-----------------------------------------------------------------------------|
+| 1   | Solo el dueño de la cuenta puede consultar su saldo                         |
+| 2   | La respuesta debe entregarse en menos de 2 segundos                         |
+| 3   | Se registra en el log cada consulta de saldo realizada                      |
+
+**ABREVIATURAS**
+
+| Abreviatura | Significado                  |
+|-------------|------------------------------|
+| JWT         | JSON Web Token               |
+| RNF         | Requerimiento No Funcional   |
+
+**HISTORIAL DE REVISIÓN**
+
+| Elaborado por    | Aprobado por | Fecha      | Descripción y Justificación de Cambios |
+|------------------|--------------|------------|----------------------------------------|
+| CVDS Company     |              | 22/10/2024 |                                        |
+| Nicolás Prieto   |              | 20/06/2026 | Creación del requerimiento RF03        |
 
 ---
 
 ### RF04 - Realizar depósitos a una cuenta
 
-- **Descripción:** El cliente autenticado puede realizar depósitos de dinero a una cuenta bancaria registrada.
-- **Actores:** Cliente, Sistema
-- **Precondiciones:** El cliente debe estar autenticado y la cuenta destino debe existir.
-- **Flujo principal:**
-  1. El cliente selecciona la cuenta destino e ingresa el monto.
-  2. El sistema valida que el monto sea mayor a cero.
-  3. El sistema acredita el monto en la cuenta.
-  4. El sistema genera un comprobante de la transacción.
-- **Flujos alternativos:**
-  - Si el monto es inválido (negativo o cero), el sistema retorna error de validación.
-  - Si la cuenta destino no existe, el sistema retorna error 404.
-- **Postcondiciones:** El saldo de la cuenta se incrementa con el monto depositado y se registra en el log de transacciones.
-- **Criterios de aceptación:**
-  - El depósito se refleja de inmediato en el saldo.
-  - Se genera comprobante con número de transacción único.
+| Código:          | RF04                            |
+|------------------|---------------------------------|
+| Nombre:          | Realizar depósitos a una cuenta |
+
+| Descripción:        | El cliente autenticado puede realizar depósitos de dinero a una cuenta bancaria registrada. |
+|---------------------|---------------------------------------------------------------------------------------------|
+| Cómo se ejecutará:  | El cliente selecciona la cuenta destino, ingresa el monto y confirma la operación. |
+| Actor principal:    | Cliente |
+| Precondiciones:     | El cliente debe estar autenticado y la cuenta destino debe existir. |
+
+**► DATOS DE ENTRADA**
+
+| Nombre        | Descripción                   | Tipo de campo | Reglas / Aplicación                    | Obligatorio |
+|---------------|-------------------------------|---------------|----------------------------------------|-------------|
+| Número cuenta | Cuenta destino del depósito   | Numérico      | 10 dígitos, cuenta debe existir        | Sí          |
+| Monto         | Valor a depositar             | Decimal       | Mayor a 0, máximo 2 decimales          | Sí          |
+| Token JWT     | Token de sesión del cliente   | Texto         | Debe ser válido y no expirado          | Sí          |
+
+**DATOS DE SALIDA**
+
+| Nombre               | Descripción                         | Tipo de campo | Reglas / Aplicación              | Obligatorio |
+|----------------------|-------------------------------------|---------------|----------------------------------|-------------|
+| Comprobante          | Confirmación de la transacción      | Texto         | Número de transacción único      | Sí          |
+| Nuevo saldo          | Saldo actualizado tras el depósito  | Decimal       | Dos decimales, no negativo       | Sí          |
+
+**FLUJO BÁSICO:**
+
+| Paso | Actor   | Descripción                                                    | Excepciones |
+|------|---------|----------------------------------------------------------------|-------------|
+| 1    | Cliente | Selecciona cuenta destino e ingresa el monto                   | -           |
+| 2    | Sistema | Valida que el monto sea mayor a cero                           | Paso 2A     |
+| 3    | Sistema | Verifica que la cuenta destino existe                          | Paso 3A     |
+| 4    | Sistema | Acredita el monto en la cuenta                                 | -           |
+| 5    | Sistema | Genera comprobante con número de transacción único             | -           |
+
+**FLUJO ALTERNO:**
+
+| Paso | Actor   | Descripción                                                    | Excepciones |
+|------|---------|----------------------------------------------------------------|-------------|
+| 2A   | Sistema | Monto inválido (negativo o cero), retorna error de validación  | -           |
+| 3A   | Sistema | Cuenta destino no existe, retorna error 404                    | -           |
+
+| Notas y comentarios: | El depósito se refleja de inmediato en el saldo y queda registrado en el log de transacciones. |
+|----------------------|-----------------------------------------------------------------------------------------------|
+
+**ANEXOS**
+
+PROTOTIPOS: Formulario de depósito con campo cuenta destino y monto.
+
+**REGLAS DE NEGOCIO**
+
+| No. | Descripción                                                                 |
+|-----|-----------------------------------------------------------------------------|
+| 1   | El monto mínimo de depósito es $1.000 COP                                  |
+| 2   | El depósito se refleja inmediatamente en el saldo                           |
+| 3   | Cada depósito genera un número de transacción único e irrepetible           |
+
+**ABREVIATURAS**
+
+| Abreviatura | Significado                  |
+|-------------|------------------------------|
+| JWT         | JSON Web Token               |
+| COP         | Peso Colombiano              |
+
+**HISTORIAL DE REVISIÓN**
+
+| Elaborado por    | Aprobado por | Fecha      | Descripción y Justificación de Cambios |
+|------------------|--------------|------------|----------------------------------------|
+| CVDS Company     |              | 22/10/2024 |                                        |
+| Nicolás Prieto   |              | 20/06/2026 | Creación del requerimiento RF04        |
 
 ---
 
-## 4. Análisis Crítico
+## Análisis Crítico
 
 ### a) ¿Identifica algún requerimiento que deba detallarse más?
 
