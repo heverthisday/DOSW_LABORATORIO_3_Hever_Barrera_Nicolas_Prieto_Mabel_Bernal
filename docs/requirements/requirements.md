@@ -20,17 +20,6 @@
 | RF07 | El sistema debe permitir realizar retiros de una cuenta validando saldo disponible |
 | RF08 | El sistema debe permitir transferencias entre cuentas registradas |
 
-## Requerimientos No Funcionales
-
-| ID    | Categoría       | Descripción |
-|-------|-----------------|-------------|
-| RNF01 | Seguridad       | Autenticación con tokens JWT |
-| RNF02 | Disponibilidad  | 99.5% uptime mensual |
-| RNF03 | Rendimiento     | Respuesta < 2 segundos por operación |
-| RNF04 | Escalabilidad   | Soportar 10.000 usuarios concurrentes |
-| RNF05 | Auditabilidad   | Log de todas las transacciones |
-| RNF06 | Mantenibilidad  | Cobertura de pruebas unitarias mínima del 80% |
-
 ---
 
 ## Detalle de Requerimientos
