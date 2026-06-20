@@ -1,3 +1,4 @@
+git merge develop
 # Documento de Requerimientos
 ## Sistema Bancario - DOSW Laboratorio 3
 
