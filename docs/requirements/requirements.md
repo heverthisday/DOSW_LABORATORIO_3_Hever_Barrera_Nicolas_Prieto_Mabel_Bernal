@@ -37,11 +37,11 @@
 
 ---
 
-### RF01 - Autenticar usuarios
+### RF01 - Autenticar usuarios con usuario y contraseña
 
-| Código:          | RF01                        |
-|------------------|-----------------------------|
-| Nombre:          | Autenticar usuarios         |
+| Código:          | RF01                                          |
+|------------------|-----------------------------------------------|
+| Nombre:          | Autenticar usuarios con usuario y contraseña  |
 
 | Descripción:        | El usuario entra al sistema con su nombre de usuario y contraseña. Si los datos son correctos, el sistema le da acceso y le entrega un token para que pueda usar las demás funciones. |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -110,11 +110,11 @@ PROTOTIPOS: Formulario de login con campos usuario y contraseña.
 
 ---
 
-### RF03 - Consultar saldo de una cuenta
+### RF03 - Consultar el saldo de una cuenta por el cliente
 
-| Código:          | RF03                          |
-|------------------|-------------------------------|
-| Nombre:          | Consultar saldo de una cuenta |
+| Código:          | RF03                                          |
+|------------------|-----------------------------------------------|
+| Nombre:          | Consultar el saldo de una cuenta por el cliente |
 
 | Descripción:        | El usuario puede ver cuánto dinero tiene en su cuenta en cualquier momento. Solo puede ver las cuentas que le pertenecen. |
 |---------------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -186,7 +186,7 @@ PROTOTIPOS: Pantalla de detalle de cuenta con saldo y últimos movimientos.
 
 | Código:          | RF04                            |
 |------------------|---------------------------------|
-| Nombre:          | Realizar depósitos a una cuenta |
+| Nombre:          | Realizar depósitos a una cuenta  |
 
 | Descripción:        | El usuario puede consignar dinero a una cuenta. El sistema revisa que la cuenta exista y que el monto sea válido antes de hacer el depósito. |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
