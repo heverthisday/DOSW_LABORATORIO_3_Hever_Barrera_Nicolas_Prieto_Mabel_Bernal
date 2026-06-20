@@ -28,7 +28,7 @@ Actualmente Bankify no cuenta con:
 
 ## 3. Diagrama de Contexto
 
-![Diagrama de Contexto C4 - Bankify](../uml/diagrama-contexto-bankify.png)
+![Diagrama de Contexto C4 - Bankify](https://github.com/heverthisday/DOSW_LABORATORIO_3_Hever_Barrera_Nicolas_Prieto_Mabel_Bernal/blob/feature/DOSW-02-proj-scope/docs/images/diagrama%20C4.jpg)
 
 **Enlace al diagrama editable:** [pegar aquí el link de Miro/Lucidchart/draw.io]
 
