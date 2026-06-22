@@ -1,5 +1,5 @@
 git merge develop
-# Documento de Requerimientos
+git add .# Documento de Requerimientos
 ## Sistema Bancario - DOSW Laboratorio 3
 
 **Equipo:** Hever Barrera, Nicolás Prieto, Mabel Bernal
@@ -76,6 +76,8 @@ git merge develop
 
 PROTOTIPOS: Formulario de login con campos usuario y contraseña.
 
+![Diagrama UML RF01](../uml/RF01UML.png)
+
 **REGLAS DE NEGOCIO**
 
 | No. | Descripción                                                                 |
@@ -147,6 +149,8 @@ PROTOTIPOS: Formulario de login con campos usuario y contraseña.
 **ANEXOS**
 
 PROTOTIPOS: Pantalla de detalle de cuenta con saldo y últimos movimientos.
+
+![Diagrama UML RF03](../uml/RF03UML.png)
 
 **REGLAS DE NEGOCIO**
 
@@ -222,6 +226,8 @@ PROTOTIPOS: Pantalla de detalle de cuenta con saldo y últimos movimientos.
 **ANEXOS**
 
 PROTOTIPOS: Formulario de depósito con campo cuenta destino y monto.
+
+![Diagrama UML RF04](../uml/RF04UML.png)
 
 **REGLAS DE NEGOCIO**
 
