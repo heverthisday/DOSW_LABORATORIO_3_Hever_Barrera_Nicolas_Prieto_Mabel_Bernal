@@ -3,34 +3,28 @@
 ## 1. Sistema
 
 Bankify es una plataforma digital fintech en etapa de Producto Mínimo Viable (MVP)
-para la gestión básica de cuentas bancarias. Permite a clientes finales consultar
-información de sus cuentas y realizar operaciones simples, mientras que el personal
-interno (Asesores, Supervisores, Gerente Financiero) gestiona clientes, cuentas y
+para la gestión básica de cuentas bancarias, tambien  Permite a clientes finales consultar
+información de sus cuentas y realizar operaciones , mientras que el personal
+interno  como los (Asesores, Supervisores, Gerente Financiero) gestiona clientes, cuentas y
 reportes tributarios.
 
-> Pauta: aquí describan en 1 párrafo qué ES el sistema (no qué problema resuelve,
-> eso va en la siguiente sección). Mencionen que es un MVP y su naturaleza fintech.
+
 
 ## 2. Problema a Resolver
 
-Actualmente Bankify no cuenta con:
+Actualmente Bankify no tiene :
 - Registro validado de cuentas bancarias
 - Consulta de saldo de una cuenta
 - Depósitos de dinero controlados
 - Reportes tributarios en PDF para clientes
 - Envío de reportes a la DIAN en formato JSON
 
-> Pauta: expliquen el impacto de no tener estas funcionalidades (riesgo regulatorio,
-> imposibilidad de operar, falta de transparencia para el cliente, etc.).
-> Usen la sección "Problema Actual" del PDF como base, pero redactado en sus
-> propias palabras y conectado con el objetivo del MVP: "validar el modelo de
-> negocio antes de escalar".
 
 ## 3. Diagrama de Contexto
 
 ![Diagrama de Contexto C4 - Bankify](https://github.com/heverthisday/DOSW_LABORATORIO_3_Hever_Barrera_Nicolas_Prieto_Mabel_Bernal/blob/feature/DOSW-02-proj-scope/docs/images/diagrama%20C4.jpg)
 
-**Enlace al diagrama editable:** [pegar aquí el link de Miro/Lucidchart/draw.io]
+**Enlace al diagrama editable:** [https://miro.com/welcomeonboard/UG91cjFoTk02WnVmcnFuckFGUUFJWlB0S3pRUkVaQ3JVRUhibFEzRER5WGt6WWFTd1RlQmovMHZKUGhPbkFRWENwVWZrci81T1VoMmY3Rit5L1JmUlFLYVI1NjdXWWhpdWxwR3FHODArVDgxWTlXTHZKdEU4L1dVUnd3OUdSSHl3VHhHVHd5UWtSM1BidUtUYmxycDRnPT0hdjE=?share_link_id=215316622083]
 
 ### Actores y sistemas identificados:
 - **Cliente**: consulta saldo, realiza depósitos, genera su reporte tributario.
@@ -44,15 +38,9 @@ Actualmente Bankify no cuenta con:
 
 ### Incluido en el MVP:
 - Autenticación de usuarios (Clientes y Operadores)
-- Gestión de clientes y cuentas según reglas de negocio (10 dígitos, banco
+- Gestión de clientes y cuentas a partir de las  reglas de negocio (10 dígitos, banco
   registrado en sistema)
 - Consulta de saldo
 - Depósitos a cuenta
 - Generación de reporte tributario individual (PDF) y consolidado (JSON para DIAN)
 
-### Fuera de alcance (no incluido en esta fase):
-> Pauta: piensen qué NO se va a construir todavía — por ejemplo: retiros,
-> transferencias entre cuentas, integración bancaria real, app móvil nativa,
-> notificaciones push, etc. Esto demuestra capacidad de análisis crítico
-> (conecta directamente con la pregunta "d" de la Parte 3 sobre qué NO debería
-> ir en el MVP).
