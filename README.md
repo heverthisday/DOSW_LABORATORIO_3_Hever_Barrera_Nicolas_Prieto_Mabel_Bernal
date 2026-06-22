@@ -1,14 +1,1 @@
 # DOSW_LABORATORIO_3_Hever_Barrera_Nicolas_Prieto_Mabel_Bernal
-
-| Q | PREGUNTAS README |
-|---|-----------------|
-| **1** | **¿Qué es un pull request en GitHub?** |
-| | Un pull request es una solicitud para fusionar los cambios de una rama a otra dentro de un repositorio en GitHub. En términos simples, cuando terminas de trabajar en una funcionalidad o corrección en tu propia rama, abres un pull request para que otros miembros del equipo revisen ese código antes de integrarlo a la rama principal. Es la forma en que GitHub facilita la revisión de código colaborativa, porque antes de hacer el merge todos pueden ver exactamente qué cambió, comentar línea por línea y pedir ajustes si algo no está bien. |
-| **2** | **¿Cómo se crea un pull request en GitHub?** |
-| | Primero debes tener tus cambios en una rama diferente a main y haberla subido al repositorio remoto con git push. Luego entras al repositorio en GitHub y normalmente aparece un aviso que dice "Compare & pull request", al que puedes darle clic directamente. Si no aparece, vas a la pestaña Pull requests y seleccionas New pull request. Ahí eliges la rama base (donde quieres que lleguen los cambios) y tu rama con los cambios. Escribes un titulo claro, una descripcion de lo que hiciste y, si trabajas con mas personas, asignas revisores. Finalmente das clic en Create pull request y queda abierto para revision. |
-| **3** | **¿Cómo se aprueba un pull request en GitHub?** |
-| | El revisor entra al pull request y va a la pestaña Files changed, donde puede ver todas las modificaciones que se hicieron al codigo. Puede dejar comentarios en lineas especificas si algo le parece incorrecto o mejorable. Cuando termina la revision, hace clic en Review changes y elige una de tres opciones: Comment si solo quiere dejar observaciones, Request changes si necesita que el autor corrija algo antes de aprobar, o Approve si el codigo esta bien y puede fusionarse. Una vez que el PR tiene las aprobaciones necesarias, se hace el merge y los cambios quedan integrados en la rama principal. |
-| **4** | **Bibliografia en norma APA** |
-| | GitHub, Inc. (2024). About pull requests. GitHub Docs. https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests |
-| | GitHub, Inc. (2024). Creating a pull request. GitHub Docs. https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request |
-| | GitHub, Inc. (2024). Approving a pull request with required reviews. GitHub Docs. https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/approving-a-pull-request-with-required-reviews |
