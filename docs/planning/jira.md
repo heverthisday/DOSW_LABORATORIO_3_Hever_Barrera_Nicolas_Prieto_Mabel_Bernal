@@ -156,14 +156,3 @@
 
 ![Timeline Jira](../images/JiraTime.png)
 
----
-
-## 5. Checklist
-
-| # | Actividad                                              | Estado |
-|---|--------------------------------------------------------|--------|
-| 1 | Crear la épica con título, descripción y vencimiento   | ✅     |
-| 2 | Crear las 4 historias de usuario                       | ✅     |
-| 3 | Crear las 12 tareas con título y descripción           | ✅     |
-| 4 | Actualizar scrum_work_bankify.md con IDs de Jira       | ✅     |
-| 5 | Capturar timeline en Jira                              | ⬜     |
