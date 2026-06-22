@@ -76,6 +76,13 @@ git add .# Documento de Requerimientos
 
 PROTOTIPOS: Formulario de login con campos usuario y contraseña.
 
+### Mockups y Flujo de Navegación
+- **Herramienta:** Figma
+- **Requerimiento diseñado:** RF01 - Autenticar usuarios con usuario y contraseña
+- **Enlace:** [Mobile Banking App Design — Bankify Mockups](https://www.figma.com/make/YdWnKc2Nds4XAOJ62E7xEl/Mobile-Banking-App-Design?t=qeLpXCe51AXCCKrF-1)
+
+[![Ver en Figma](https://img.shields.io/badge/Figma-Mockups%20Bankify-F24E1E?logo=figma&logoColor=white)](https://www.figma.com/make/YdWnKc2Nds4XAOJ62E7xEl/Mobile-Banking-App-Design?t=qeLpXCe51AXCCKrF-1)
+
 ![Diagrama UML RF01](../uml/RF01UML.png)
 
 **REGLAS DE NEGOCIO**
@@ -378,6 +385,7 @@ PROTOTIPOS: Formulario de registro de cuenta con campo número y selector de ban
 **ANEXOS**
 
 PROTOTIPOS: Pantalla de reportes con selector de fechas y botón de descarga.
+
 
 **REGLAS DE NEGOCIO**
 
