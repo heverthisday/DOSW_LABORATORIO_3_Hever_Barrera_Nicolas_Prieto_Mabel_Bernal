@@ -5,7 +5,7 @@
 ---
 
 ## ️ Épica: Login Seguro y Operación Base de Depósitos
-* **ID:** `EP-01`
+* **ID:** `EP-01` | **Jira:** `SCRUM-1`
 * **Descripción:** Esta épica. La idea es que el usuario pueda iniciar sesión sin problemas de seguridad y pueda hacer la transacción más básica de todas: meter plata a la cuenta (depósitos). Con esto probamos que la base de datos y la lógica principal funcionen bien antes de ponernos a hacer reportes o consultas.
 * **Requerimientos que cubre:** RF01 (Autenticación) y RF04 (Depósitos).
 * **Actores:** Cliente.
@@ -16,6 +16,7 @@
 ##  Historias de Usuario (HUs) y Tareas
 
 ### HU-01: Login con Usuario y Contraseña (RF01)
+* **ID Jira:** `SCRUM-2`
 * **Historia:** Como **Cliente de Bankify**,
   quiero **iniciar sesión con mi usuario y clave**,
   para **poder entrar a la aplicación y estar seguro de que nadie más va a ver mi plata**.
@@ -33,13 +34,14 @@
     * **Entonces** la app le muestra un error genérico (para que no sepa exactamente en qué falló por seguridad) y no lo deja pasar para nada.
 
 ####  Tareas Técnicas
-1. **T-01.1:** Ponerse de acuerdo en cómo se va a conectar el backend y el frontend para el login
-2. **T-01.2:** Hacer el código del backend que revisa la contraseña y mantiene la sesión activa.
-3. **T-01.3:** Hacer la pantalla de Login en el frontend con su validación de campos vacíos.
+1. **T-01.1** `SCRUM-6` Ponerse de acuerdo en cómo se va a conectar el backend y el frontend para el login
+2. **T-01.2** `SCRUM-7` Hacer el código del backend que revisa la contraseña y mantiene la sesión activa.
+3. **T-01.3** `SCRUM-8` Hacer la pantalla de Login en el frontend con su validación de campos vacíos.
 
 ---
 
 ###  HU-02: Bloqueo de Cuenta por Errores Seguidos (RF01)
+* **ID Jira:** `SCRUM-3`
 * **Historia:** Como **Cliente de Bankify**,
   quiero **que la app bloquee mi cuenta si se equivocan muchas veces con la clave**,
   para **evitar que un extraño intente adivinar mi contraseña probando un montón de veces**.
@@ -53,13 +55,14 @@
     * **Entonces** el sistema cambia el estado del usuario a "Bloqueado", saca un aviso diciendo cuánto tiempo debe esperar y rechaza cualquier otro intento por ese rato.
 
 ####  Tareas Técnicas
-1. **T-02.1:** Modificar la base de datos para guardar los intentos fallidos y la hora del bloqueo. [Base de Datos]
-2. **T-02.2:** Crear la lógica que cuente los fallos y controle el tiempo para desbloquear la cuenta. [Backend]
-3. **T-02.3:** Hacer pruebas automáticas que simulen los 3 fallos para verificar que sí bloquee. [Pruebas]
+1. **T-02.1** `SCRUM-9` Modificar la base de datos para guardar los intentos fallidos y la hora del bloqueo. [Base de Datos]
+2. **T-02.2** `SCRUM-10` Crear la lógica que cuente los fallos y controle el tiempo para desbloquear la cuenta. [Backend]
+3. **T-02.3** `SCRUM-11` Hacer pruebas automáticas que simulen los 3 fallos para verificar que sí bloquee. [Pruebas]
 
 ---
 
 ###  HU-03: Hacer Depósitos a la Cuenta (RF04)
+* **ID Jira:** `SCRUM-4`
 * **Historia:** Como **Cliente autenticado de Bankify**,
   quiero **hacer un depósito poniendo el número de cuenta y el valor**,
   para **ver que el saldo de mi cuenta suba de inmediato**.
@@ -73,13 +76,14 @@
     * **Entonces** el sistema actualiza el saldo en la base de datos en una sola operación y le muestra un código de comprobante único en pantalla.
 
 ####  Tareas Técnicas
-1. **T-03.1:** Estructurar qué datos va a recibir y responder la ruta de depósitos. [Backend]
-2. **T-03.2:** Crear el código para registrar el depósito de forma segura y actualizar el saldo en la BD. [Backend]
-3. **T-03.3:** Hacer el formulario de depósitos en el frontend y validar que no metan letras o dejen campos vacíos. [Frontend]
+1. **T-03.1** `SCRUM-12` Estructurar qué datos va a recibir y responder la ruta de depósitos. [Backend]
+2. **T-03.2** `SCRUM-13` Crear el código para registrar el depósito de forma segura y actualizar el saldo en la BD. [Backend]
+3. **T-03.3** `SCRUM-14` Hacer el formulario de depósitos en el frontend y validar que no metan letras o dejen campos vacíos. [Frontend]
 
 ---
 
 ###  HU-04: Validar Monto Mínimo del Depósito (RF04)
+* **ID Jira:** `SCRUM-5`
 * **Historia:** Como **Cliente autenticado de Bankify**,
   quiero **que la app me rebote el depósito si pongo valores que no tienen sentido**,
   para **evitar meter mal el dedo o hacer transacciones por error**.
@@ -93,8 +97,9 @@
     * **Entonces** la app frena el envío de una, saca un letrero rojo explicando las reglas de montos mínimos y no manda nada al backend.
 
 ####  Tareas Técnicas
-1. **T-04.1:** Hacer  una validación en el servicio del backend para que  enlance una excepción personalizada si el monto es menor al mínimo de la app ($1.000 COP). [Backend]
-2. **T-04.2:** Diseñar los avisos o alertas en el Frontend para mostrar el mensaje de error exacto que responda la API. [Frontend]
+1. **T-04.1** `SCRUM-15` Hacer una validación en el servicio del backend para que enlance una excepción personalizada si el monto es menor al mínimo de la app ($1.000 COP). [Backend]
+2. **T-04.2** `SCRUM-16` Diseñar los avisos o alertas en el Frontend para mostrar el mensaje de error exacto que responda la API. [Frontend]
+3. **T-04.3** `SCRUM-17` Realizar pruebas funcionales de validación de montos. [Pruebas]
 
 
 ---
