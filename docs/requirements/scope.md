@@ -22,7 +22,8 @@ Actualmente Bankify no tiene :
 
 ## 3. Diagrama de Contexto
 
-![Diagrama de Contexto C4 - Bankify](https://github.com/heverthisday/DOSW_LABORATORIO_3_Hever_Barrera_Nicolas_Prieto_Mabel_Bernal/blob/feature/DOSW-02-proj-scope/docs/images/diagramaC4.jpg)
+<img width="1454" height="844" alt="image" src="https://github.com/user-attachments/assets/6f737835-278a-4e18-aa49-172c4df26621" />
+
 
 **Enlace al diagrama editable:** [https://miro.com/welcomeonboard/UG91cjFoTk02WnVmcnFuckFGUUFJWlB0S3pRUkVaQ3JVRUhibFEzRER5WGt6WWFTd1RlQmovMHZKUGhPbkFRWENwVWZrci81T1VoMmY3Rit5L1JmUlFLYVI1NjdXWWhpdWxwR3FHODArVDgxWTlXTHZKdEU4L1dVUnd3OUdSSHl3VHhHVHd5UWtSM1BidUtUYmxycDRnPT0hdjE=?share_link_id=215316622083]
 
