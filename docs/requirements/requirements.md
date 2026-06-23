@@ -1,5 +1,3 @@
-git merge develop
-git add .# Documento de Requerimientos
 ## Sistema Bancario - DOSW Laboratorio 3
 
 **Equipo:** Hever Barrera, Nicolás Prieto, Mabel Bernal
