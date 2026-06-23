@@ -131,4 +131,4 @@ Con 16 puntos en el Sprint 1 el equipo tiene una carga manejable que permite ent
 
 ### Captura Sprint Backlog en Jira
 
-> Agregar aquí la captura de pantalla del Sprint Backlog en Jira
+<img width="2559" height="914" alt="image" src="https://github.com/user-attachments/assets/7b50b468-c36b-4202-819b-ebdf2bc92e2d" />
